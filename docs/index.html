@@ -186,6 +186,14 @@
         gap: 12px;
       }
 
+      .calendar-frame {
+        width: 100%;
+        height: 760px;
+        border: 0;
+        border-radius: 16px;
+        background: #fff;
+      }
+
       .link-box {
         padding: 12px 14px;
         border-radius: 12px;
@@ -261,6 +269,7 @@
             href="https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
             >添加到 Google Calendar</a
           >
+          <a class="btn btn-ghost" href="#preview">网页预览</a>
         </div>
         <p class="note">
           提示：在浏览器打开 ICS 链接会下载文件，订阅请在日历应用里选择“通过网址添加”。
@@ -293,6 +302,26 @@
             <li>iPhone/iPad：设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历。</li>
             <li>macOS：日历 App → 文件 → 新建日历订阅 → 粘贴 ICS 链接。</li>
           </ul>
+        </section>
+
+        <section class="card" id="preview" style="--delay: 0.26s">
+          <h2>网页预览</h2>
+          <p>
+            这里是 Google Calendar 的公开嵌入预览（议程视图）。想看月历视图可
+            <a
+              href="https://calendar.google.com/calendar/embed?src=20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com&ctz=Asia%2FTokyo"
+              target="_blank"
+              rel="noopener"
+              >新窗口打开</a
+            >。
+          </p>
+          <div style="height: 14px"></div>
+          <iframe
+            class="calendar-frame"
+            src="https://calendar.google.com/calendar/embed?mode=AGENDA&src=20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com&ctz=Asia%2FTokyo"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </section>
 
         <section class="card" style="--delay: 0.28s">
