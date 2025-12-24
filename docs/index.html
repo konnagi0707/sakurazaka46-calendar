@@ -285,7 +285,7 @@
           <h3 data-i18n="path_a_title"></h3>
           <p class="muted" data-i18n="path_a_note"></p>
           <ol>
-            <li data-i18n="path_a_s1"></li>
+            <li data-i18n="path_a_s1" data-i18n-html="true"></li>
             <li data-i18n="path_a_s2"></li>
             <li data-i18n="path_a_s3"></li>
             <li data-i18n="path_a_s4"></li>
@@ -303,7 +303,7 @@
 
           <p><b data-i18n="path_b1_title"></b></p>
           <ol>
-            <li data-i18n="path_b1_s1"></li>
+            <li data-i18n="path_b1_s1" data-i18n-html="true"></li>
             <li data-i18n="path_b1_s2"></li>
             <li data-i18n="path_b1_s3"></li>
             <li data-i18n="path_b1_s4"></li>
@@ -381,7 +381,9 @@
           path_a_title: "A. Google Calendar",
           path_a_note:
             "适合 Android、Google Calendar 网页版、iOS 上的 Google Calendar App。更新通常更快。",
-          path_a_s1: "点击“添加到 Google Calendar”。",
+          link_gcal: "添加到 Google Calendar",
+          link_ics: "这里",
+          path_a_s1: "点击{gcal}。",
           path_a_s2: "按页面提示完成“添加/订阅”。",
           path_a_s3: "成功后在 Google Calendar 左侧“其他日历”里能看到并勾选。",
           path_a_s4: "手机端在侧边栏勾选该日历。",
@@ -392,7 +394,7 @@
           path_b_note:
             "iCal 格式（ICS 格式）：复制下方链接即可获得共享链接。如果你的日历应用支持 iCal/ICS 订阅，除了 Google Calendar 之外也能添加（例如 iPhone 自带“日历”、Outlook 等）。",
           path_b1_title: "iPhone（自带“日历”App）添加示例",
-          path_b1_s1: "复制下方 ICS 链接。",
+          path_b1_s1: "点击{ics}打开 ICS 链接。",
           path_b1_s2: "打开设置，在顶部搜索“订阅”（或“日历”）。",
           path_b1_s3: "进入“添加已订阅的日历”。",
           path_b1_s4: "粘贴 ICS 链接并订阅。",
@@ -435,7 +437,9 @@
           path_a_title: "A. Google Calendar",
           path_a_note:
             "適合 Android、Google Calendar 網頁、iOS 的 Google Calendar App。更新通常較快。",
-          path_a_s1: "點「加入 Google Calendar」。",
+          link_gcal: "加入 Google Calendar",
+          link_ics: "這裡",
+          path_a_s1: "點{gcal}。",
           path_a_s2: "依頁面提示完成加入／訂閱。",
           path_a_s3: "成功後在 Google Calendar 左側「其他日曆」可看到並勾選。",
           path_a_s4: "手機端在側邊欄勾選該日曆。",
@@ -446,7 +450,7 @@
           path_b_note:
             "iCal 格式（ICS 格式）：複製下方連結即可取得共享連結。若行事曆 App 支援 iCal/ICS 訂閱，除了 Google Calendar 之外也可加入（例如 iPhone 內建「行事曆」、Outlook 等）。",
           path_b1_title: "iPhone（內建「行事曆」App）設定示例",
-          path_b1_s1: "複製下方 ICS 連結。",
+          path_b1_s1: "點{ics}開啟 ICS 連結。",
           path_b1_s2: "打開設定，在頂部搜尋「訂閱」（或「行事曆」）。",
           path_b1_s3: "進入「加入已訂閱的行事曆」。",
           path_b1_s4: "貼上 ICS 連結並訂閱。",
@@ -488,7 +492,9 @@
           path_a_title: "A. Google Calendar",
           path_a_note:
             "Android / Google カレンダー Web / iOS の Google カレンダー App 向け。反映が早いことが多いです。",
-          path_a_s1: "「Google カレンダーに追加」をクリック。",
+          link_gcal: "Google カレンダーに追加",
+          link_ics: "こちら",
+          path_a_s1: "「{gcal}」をクリック。",
           path_a_s2: "画面の案内に沿って追加/登録。",
           path_a_s3: "追加後、左の「他のカレンダー」に表示されチェックできます。",
           path_a_s4: "スマホはサイドバーのカレンダー一覧で有効化。",
@@ -499,7 +505,7 @@
           path_b_note:
             "iCal形式（ICS形式）：下のリンクをコピーすると共有リンクとして使えます。iCal/ICS の購読に対応していれば、Google カレンダー以外のアプリ（iPhone標準「カレンダー」、Outlook など）にも追加可能です。",
           path_b1_title: "iPhone標準「カレンダー」アプリでの設定例",
-          path_b1_s1: "下記の ICS リンクをコピー。",
+          path_b1_s1: "ICS リンクは{ics}をクリック。",
           path_b1_s2:
             "iPhone の「設定」を開き、上部の検索で「照会」/「購読」（見つからない場合は「カレンダー」）を検索。",
           path_b1_s3: "「照会カレンダーを追加」を開く。",
@@ -543,7 +549,9 @@
           path_a_title: "A. Google Calendar",
           path_a_note:
             "Best for Android, Google Calendar web, and the Google Calendar app on iOS. Usually updates faster.",
-          path_a_s1: "Click “Add to Google Calendar.”",
+          link_gcal: "Add to Google Calendar",
+          link_ics: "here",
+          path_a_s1: "Click {gcal}.",
           path_a_s2: "Follow the add/subscribe steps.",
           path_a_s3: "It will appear under “Other calendars” on the left.",
           path_a_s4: "On mobile, enable it in the sidebar list.",
@@ -554,7 +562,7 @@
           path_b_note:
             "iCal (ICS) format: copy the link below to get the shared iCal/ICS URL. If your calendar app supports iCal/ICS subscriptions, you can add this calendar outside Google Calendar too (e.g., iPhone Calendar, Outlook).",
           path_b1_title: "iPhone (built-in Calendar app) example",
-          path_b1_s1: "Copy the ICS link below.",
+          path_b1_s1: "Click the ICS link {ics}.",
           path_b1_s2:
             "Open Settings and search for “Subscription” (or “Calendar”).",
           path_b1_s3: "Open “Add Subscribed Calendar.”",
@@ -601,9 +609,31 @@
         document.documentElement.lang = L;
         document.title = I18N[L].title;
 
+        const gcalLink =
+          I18N[L].link_gcal && GOOGLE_ADD_URL
+            ? `<a href="${GOOGLE_ADD_URL}" target="_blank" rel="noopener">${I18N[L].link_gcal}</a>`
+            : "";
+        const icsLink =
+          I18N[L].link_ics && ICS_URL
+            ? `<a href="${ICS_URL}" target="_blank" rel="noopener">${I18N[L].link_ics}</a>`
+            : "";
+
         document.querySelectorAll("[data-i18n]").forEach((el) => {
           const key = el.getAttribute("data-i18n");
-          if (I18N[L][key] != null) el.textContent = I18N[L][key];
+          const value = I18N[L][key];
+          if (value == null) return;
+          if (el.hasAttribute("data-i18n-html")) {
+            let html = value;
+            if (gcalLink) {
+              html = html.split("{gcal}").join(gcalLink);
+            }
+            if (icsLink) {
+              html = html.split("{ics}").join(icsLink);
+            }
+            el.innerHTML = html;
+          } else {
+            el.textContent = value;
+          }
         });
 
         document.getElementById("icsUrl").textContent = ICS_URL;
