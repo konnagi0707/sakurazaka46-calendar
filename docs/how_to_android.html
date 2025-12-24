@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Android Setup · Sakurazaka46 Calendar</title>
+    <meta
+      name="description"
+      content="Android 添加/订阅櫻坂46日程日历的详细教程（非官方）。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #101316;
+        --muted: #4e5660;
+        --line: #e6e6e6;
+        --accent: #0f6cb6;
+        --accent-ink: #0a4c82;
+        --paper: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at top left, #f4f7ff 0%, #ffffff 60%);
+        color: var(--ink);
+        font-family: "Zen Kaku Gothic New", "Noto Sans JP", "Noto Sans CJK SC",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(0, 0, 0, 0.04) 0.5px,
+          transparent 0.5px
+        );
+        background-size: 22px 22px;
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px 18px 100px;
+        animation: fade-up 0.7s ease both;
+      }
+
+      h1 {
+        font-family: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN",
+          serif;
+        font-size: clamp(22px, 3.3vw, 30px);
+        margin: 0 0 10px;
+        letter-spacing: 0.06em;
+      }
+
+      h2 {
+        margin: 20px 0 10px;
+        font-size: 16px;
+      }
+
+      p,
+      li {
+        line-height: 1.75;
+        margin: 8px 0;
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .box {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 16px 0;
+        background: var(--paper);
+        box-shadow: 0 10px 26px rgba(18, 22, 26, 0.05);
+      }
+
+      code,
+      pre {
+        background: #f6f7f9;
+        border-radius: 8px;
+      }
+
+      code {
+        padding: 2px 6px;
+      }
+
+      pre {
+        padding: 10px 12px;
+        overflow: auto;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .btns a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin: 8px 10px 0 0;
+        color: var(--accent-ink);
+        background: #ffffff;
+      }
+
+      .topnav {
+        margin-bottom: 12px;
+      }
+
+      figure {
+        margin: 14px 0 0;
+      }
+
+      img {
+        max-width: 100%;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        margin: 10px 0;
+      }
+
+      figcaption {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .lang {
+        position: fixed;
+        right: 14px;
+        bottom: 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(6px);
+        padding: 8px 10px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 12px;
+        box-shadow: 0 8px 20px rgba(18, 22, 26, 0.08);
+      }
+
+      .lang button {
+        border: 0;
+        background: transparent;
+        padding: 6px 8px;
+        border-radius: 999px;
+        cursor: pointer;
+        color: var(--ink);
+      }
+
+      .lang button.active {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .btns a {
+          width: 100%;
+          justify-content: center;
+        }
+        .lang {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topnav">
+        <a href="./" data-i18n="back_home"></a>
+      </div>
+
+      <h1 data-i18n="title"></h1>
+      <p class="muted" data-i18n="subtitle"></p>
+
+      <div class="box">
+        <p><b data-i18n="links_title"></b></p>
+        <p><b data-i18n="gadd_label"></b></p>
+        <pre id="gAddUrl"></pre>
+        <p><b data-i18n="ics_label"></b></p>
+        <pre id="icsUrl"></pre>
+
+        <div class="btns">
+          <a id="btnGadd" target="_blank" rel="noopener" data-i18n="btn_add_gcal"></a>
+          <a id="btnIcs" target="_blank" rel="noopener" data-i18n="btn_open_ics"></a>
+        </div>
+      </div>
+
+      <h2 data-i18n="method1_title"></h2>
+      <p class="muted" data-i18n="method1_note"></p>
+      <ol>
+        <li data-i18n="m1_s1"></li>
+        <li data-i18n="m1_s2"></li>
+        <li data-i18n="m1_s3"></li>
+        <li data-i18n="m1_s4"></li>
+      </ol>
+
+      <figure>
+        <img src="assets/howto/android/step1.jpg" alt="Android step" />
+        <figcaption data-i18n="img_note"></figcaption>
+      </figure>
+
+      <h2 data-i18n="method2_title"></h2>
+      <p class="muted" data-i18n="method2_note"></p>
+      <ol>
+        <li data-i18n="m2_s1"></li>
+        <li data-i18n="m2_s2"></li>
+        <li data-i18n="m2_s3"></li>
+        <li data-i18n="m2_s4"></li>
+        <li data-i18n="m2_s5"></li>
+      </ol>
+
+      <h2 data-i18n="avoid_import_title"></h2>
+      <ul>
+        <li data-i18n="avoid_import_1"></li>
+        <li data-i18n="avoid_import_2"></li>
+      </ul>
+
+      <h2 data-i18n="trouble_title"></h2>
+      <ul>
+        <li data-i18n="t1"></li>
+        <li data-i18n="t2"></li>
+        <li data-i18n="t3"></li>
+        <li data-i18n="t4"></li>
+      </ul>
+
+      <p class="muted" data-i18n="footer_note"></p>
+    </div>
+
+    <div class="lang" aria-label="Language Switcher">
+      <button data-lang="zh-CN">简体中文</button>
+      <button data-lang="zh-TW">繁體中文</button>
+      <button data-lang="ja">日本語</button>
+      <button data-lang="en">English</button>
+    </div>
+
+    <script>
+      const ICS_URL =
+        "https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics";
+      const GOOGLE_ADD_URL =
+        "https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t";
+
+      const I18N = {
+        "zh-CN": {
+          back_home: "← 返回主页",
+          title: "安卓（Android）添加/订阅教程",
+          subtitle: "推荐使用“添加 Google 日历（cid）”，次选“订阅 ICS”。请不要使用“导入 Import”。",
+          links_title: "链接（复制使用）",
+          gadd_label: "添加到 Google Calendar（推荐）",
+          ics_label: "iCal / ICS 订阅链接（通用）",
+          btn_add_gcal: "打开“添加到 Google Calendar”",
+          btn_open_ics: "打开 ICS 链接",
+          method1_title: "方法 1（推荐）：添加 Google 日历（适合 Android / Google Calendar）",
+          method1_note: "这种方式是 Google 内部日历，通常比外部 ICS 更新更及时，也更稳定。",
+          m1_s1: "点击上面的“添加到 Google Calendar”链接（cid）。",
+          m1_s2: "在打开的页面中确认日历名称与拥有者，然后选择“添加/订阅”。",
+          m1_s3: "打开手机的 Google Calendar App，左上角菜单 → 设置 → 确认该日历已勾选显示。",
+          m1_s4: "若没立刻出现，等待几分钟或下拉刷新（同步有时会延迟）。",
+          img_note: "示例截图（把更多步骤图放到 assets/howto/android/ 即可）。",
+          method2_title: "方法 2（备选）：订阅 ICS（通过 Google Calendar 网页端添加）",
+          method2_note: "Google Calendar 手机 App 通常没有“通过网址添加日历”的入口；需要在网页端添加，之后手机 App 会同步显示。",
+          m2_s1: "在手机浏览器或电脑打开 Google Calendar 网页（calendar.google.com），登录你的 Google 账号。",
+          m2_s2: "左侧“其他日历”旁点“+” → 选择“通过网址”。",
+          m2_s3: "粘贴上面的 ICS 链接（public/basic.ics），点击“添加日历”。",
+          m2_s4: "回到 Google Calendar App，等待同步后在列表中勾选该日历。",
+          m2_s5: "注意：外部 ICS 在 Google 端可能有缓存，更新不会立刻出现，这是正常现象。",
+          avoid_import_title: "为什么不要“导入 Import”",
+          avoid_import_1: "导入会把事件复制到你选择的某个日历，之后不会自动更新。",
+          avoid_import_2: "想要“持续更新”，必须用“订阅/通过网址添加”。",
+          trouble_title: "常见问题（Troubleshooting）",
+          t1: "看不到事件：确认日历已勾选显示；或等待同步几分钟。",
+          t2: "时间不对：检查你 Google Calendar 的时区设置（建议 Asia/Tokyo）。",
+          t3: "更新慢：订阅端缓存导致延迟，不是脚本没跑；可优先用“方法 1（cid）”。",
+          t4: "出现重复：通常是用“导入”导致的；请删除导入的那份，改用订阅。",
+          footer_note: "提示：本项目为非官方整理，日程以官方公告为准。",
+        },
+        "zh-TW": {
+          back_home: "← 回到首頁",
+          title: "Android 新增／訂閱教學",
+          subtitle: "建議用「加入 Google 行事曆（cid）」，其次才是「訂閱 ICS」。請不要用 Import 匯入。",
+          links_title: "連結（可直接複製）",
+          gadd_label: "加入 Google Calendar（推薦）",
+          ics_label: "iCal / ICS 訂閱連結（通用）",
+          btn_add_gcal: "開啟「加入 Google Calendar」",
+          btn_open_ics: "開啟 ICS 連結",
+          method1_title: "方法 1（推薦）：加入 Google 行事曆（Android / Google Calendar 最佳）",
+          method1_note: "這是 Google 內部行事曆，通常比外部 ICS 更新更快且更穩定。",
+          m1_s1: "點擊上方「加入 Google Calendar」連結（cid）。",
+          m1_s2: "在頁面確認行事曆名稱後按「加入/訂閱」。",
+          m1_s3: "打開 Google Calendar App：左上角選單 → 設定 → 確認該行事曆已勾選顯示。",
+          m1_s4: "若沒有立刻出現，稍等幾分鐘或重新整理（同步可能延遲）。",
+          img_note: "示例截圖（需要更多步驟圖可放在 assets/howto/android/）。",
+          method2_title: "方法 2（備選）：訂閱 ICS（用 Google Calendar 網頁端加入）",
+          method2_note: "Google Calendar 手機 App 通常沒有「透過網址加入」；需先在網頁端加入，之後 App 會同步顯示。",
+          m2_s1: "用手機瀏覽器或電腦打開 calendar.google.com，登入 Google 帳號。",
+          m2_s2: "左側「其他日曆」旁按「+」→ 選「透過網址」。",
+          m2_s3: "貼上 ICS 連結（public/basic.ics）→ 加入日曆。",
+          m2_s4: "回到 App 等待同步，並在列表中勾選顯示。",
+          m2_s5: "注意：外部 ICS 在 Google 端可能有快取，更新不一定立刻出現。",
+          avoid_import_title: "為什麼不要 Import 匯入",
+          avoid_import_1: "匯入會把事件複製到你選的行事曆，之後不會自動更新。",
+          avoid_import_2: "要持續更新必須用「訂閱／透過網址加入」。",
+          trouble_title: "常見問題",
+          t1: "看不到：確認已勾選顯示；或稍等同步。",
+          t2: "時間不對：確認時區（建議 Asia/Tokyo）。",
+          t3: "更新慢：訂閱端快取造成延遲；建議優先用方法 1（cid）。",
+          t4: "重複事件：多半是匯入造成；請刪掉匯入那份改用訂閱。",
+          footer_note: "提示：非官方整理，請以官方公告為準。",
+        },
+        ja: {
+          back_home: "← トップへ戻る",
+          title: "Android 追加／購読ガイド",
+          subtitle: "おすすめは「Google カレンダーに追加（cid）」。次点が「ICS 購読」。Import は推奨しません。",
+          links_title: "リンク",
+          gadd_label: "Google Calendar に追加（推奨）",
+          ics_label: "iCal / ICS（汎用購読リンク）",
+          btn_add_gcal: "「Google Calendar に追加」を開く",
+          btn_open_ics: "ICS を開く",
+          method1_title: "方法 1（推奨）：Google カレンダーに追加（Android / Google Calendar 向け）",
+          method1_note: "Google 内部カレンダーのため、外部 ICS より反映が早いことが多く安定します。",
+          m1_s1: "上の「Google Calendar に追加（cid）」リンクを開きます。",
+          m1_s2: "カレンダー名を確認して「追加/登録」を実行します。",
+          m1_s3: "Google Calendar アプリで表示設定（カレンダーのチェック）を確認します。",
+          m1_s4: "反映しない場合は数分待つか再同期してください。",
+          img_note: "サンプル画像（追加の画像は assets/howto/android/ に置けます）。",
+          method2_title: "方法 2（代替）：ICS を購読（Google Calendar のWebから追加）",
+          method2_note:
+            "Android の Google Calendar アプリには URL 追加がない場合があります。Web で追加するとアプリに同期されます。",
+          m2_s1: "calendar.google.com を開き、Google アカウントでログインします。",
+          m2_s2: "「他のカレンダー」→「+」→「URL から」を選びます。",
+          m2_s3: "ICS（public/basic.ics）を貼り付けて追加します。",
+          m2_s4: "アプリに戻って同期を待ち、カレンダー表示をONにします。",
+          m2_s5: "外部 ICS はキャッシュの都合で反映が遅れることがあります（仕様）。",
+          avoid_import_title: "Import を避ける理由",
+          avoid_import_1: "Import はイベントをコピーするだけで、自動更新されません。",
+          avoid_import_2: "継続更新したい場合は購読（URL 追加）を使ってください。",
+          trouble_title: "よくある問題",
+          t1: "表示されない：カレンダー表示のチェック、同期待ち。",
+          t2: "時間がずれる：タイムゾーン設定（Asia/Tokyo 推奨）。",
+          t3: "更新が遅い：購読側の更新間隔・キャッシュの影響。方法1（cid）推奨。",
+          t4: "重複する：Import が原因のことが多い。Import 分を削除して購読に変更。",
+          footer_note: "非公式整理ページです。最終的には公式発表をご確認ください。",
+        },
+        en: {
+          back_home: "← Back to home",
+          title: "Android setup guide",
+          subtitle:
+            "Recommended: add the Google calendar (cid). Alternative: subscribe via ICS. Avoid importing.",
+          links_title: "Links",
+          gadd_label: "Add to Google Calendar (recommended)",
+          ics_label: "iCal / ICS subscription link",
+          btn_add_gcal: "Open “Add to Google Calendar”",
+          btn_open_ics: "Open ICS link",
+          method1_title:
+            "Method 1 (recommended): Add the Google calendar (best for Android/Google Calendar)",
+          method1_note:
+            "This is an internal Google calendar, usually more timely than external ICS subscriptions.",
+          m1_s1: "Open the “Add to Google Calendar” (cid) link above.",
+          m1_s2: "Confirm the calendar name and add/subscribe.",
+          m1_s3: "In the Google Calendar app, make sure the calendar is enabled in settings.",
+          m1_s4: "If it doesn’t show immediately, wait a few minutes and refresh/sync.",
+          img_note: "Sample screenshot (place more images under assets/howto/android/).",
+          method2_title:
+            "Method 2 (alternative): Subscribe via ICS (add from Google Calendar Web)",
+          method2_note:
+            "The Android app may not provide “Add by URL”. Add it on calendar.google.com; it will sync to the app.",
+          m2_s1: "Open calendar.google.com on your phone/PC and sign in.",
+          m2_s2: "On the left, “Other calendars” → “+” → “From URL”.",
+          m2_s3: "Paste the ICS URL (public/basic.ics) and add.",
+          m2_s4: "Return to the app, wait for sync, and enable the calendar in settings.",
+          m2_s5: "External ICS can be cached; updates may not appear immediately (expected).",
+          avoid_import_title: "Why you should avoid importing",
+          avoid_import_1:
+            "Importing copies events into a calendar and does not auto-update.",
+          avoid_import_2: "For auto-updates, use subscription / add-by-URL instead.",
+          trouble_title: "Troubleshooting",
+          t1: "No events: ensure the calendar is enabled; wait for sync.",
+          t2: "Wrong time: verify timezone (Asia/Tokyo recommended).",
+          t3: "Slow updates: client-side caching; prefer Method 1 (cid).",
+          t4: "Duplicates: usually caused by importing; remove imported events and subscribe.",
+          footer_note: "Unofficial page. Please rely on official announcements for final details.",
+        },
+      };
+
+      function normalizeLang(lang) {
+        const supported = ["zh-CN", "zh-TW", "ja", "en"];
+        if (supported.includes(lang)) return lang;
+        const l = (lang || "").toLowerCase();
+        if (l.startsWith("zh-tw") || l.startsWith("zh-hk")) return "zh-TW";
+        if (l.startsWith("zh")) return "zh-CN";
+        if (l.startsWith("ja")) return "ja";
+        return "en";
+      }
+
+      function setLang(lang) {
+        const L = normalizeLang(lang);
+        localStorage.setItem("site_lang", L);
+        document.documentElement.lang = L;
+        document.title = I18N[L].title || "Android Setup";
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (I18N[L][key] != null) el.textContent = I18N[L][key];
+        });
+
+        document.getElementById("icsUrl").textContent = ICS_URL;
+        document.getElementById("gAddUrl").textContent = GOOGLE_ADD_URL;
+        document.getElementById("btnIcs").href = ICS_URL;
+        document.getElementById("btnGadd").href = GOOGLE_ADD_URL;
+
+        document.querySelectorAll(".lang button").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === L);
+        });
+      }
+
+      (function init() {
+        const stored = localStorage.getItem("site_lang");
+        const browser = navigator.language || "en";
+        setLang(stored || browser);
+        document.querySelectorAll(".lang button").forEach((btn) => {
+          btn.addEventListener("click", () => setLang(btn.dataset.lang));
+        });
+      })();
+    </script>
+  </body>
+</html>
