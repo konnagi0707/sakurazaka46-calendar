@@ -13,6 +13,17 @@ Enable Pages with source: `main` branch + `/docs` folder. Then subscribe:
 
 * https://<user>.github.io/<repo>/sakurazaka46_all.ics
 
+## 订阅方式（不要导入）
+ICS 订阅链接：
+```
+https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics
+```
+
+Google Calendar 添加：
+```
+https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
+```
+
 ## Google Calendar Sync
 This repo also includes a Google Calendar sync workflow that writes events into a public calendar
 so you can share `.../public/basic.ics`.

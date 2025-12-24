@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>櫻坂46 日程日历（非官方）</title>
+    <meta
+      name="description"
+      content="櫻坂46 官网日程自动同步的订阅日历（非官方），支持 Google Calendar 与 iCal/ICS。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #1a1f24;
+        --muted: #4a5560;
+        --accent: #e6503c;
+        --accent-strong: #b93b2b;
+        --paper: #fffaf4;
+        --card: #ffffffcc;
+        --line: #e7d9c8;
+        --shadow: 0 18px 60px rgba(20, 22, 26, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Zen Kaku Gothic New", "Noto Sans JP", "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+        color: var(--ink);
+        background: linear-gradient(135deg, #fce5cf 0%, #f9f0df 35%, #eaf4f1 100%);
+        min-height: 100vh;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: auto;
+        width: 42vmax;
+        height: 42vmax;
+        border-radius: 50%;
+        filter: blur(0px);
+        z-index: -2;
+        opacity: 0.6;
+      }
+
+      body::before {
+        top: -10vmax;
+        right: -12vmax;
+        background: radial-gradient(circle, #ffd3b6 0%, #ffb08a 40%, transparent 70%);
+      }
+
+      body::after {
+        bottom: -14vmax;
+        left: -10vmax;
+        background: radial-gradient(circle, #cfe6e2 0%, #9ccdc6 45%, transparent 72%);
+      }
+
+      .grain {
+        position: fixed;
+        inset: 0;
+        background-image: repeating-linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.12) 0px,
+          rgba(255, 255, 255, 0.12) 1px,
+          transparent 1px,
+          transparent 6px
+        );
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.25;
+      }
+
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 42px 18px 70px;
+      }
+
+      header {
+        display: grid;
+        gap: 18px;
+        padding: 36px 28px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        animation: rise 0.9s ease both;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: #fff2e6;
+        border: 1px solid #f3cbb2;
+        color: #8f3d2f;
+        width: fit-content;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: clamp(28px, 4vw, 44px);
+        letter-spacing: 0.04em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fffaf6;
+        box-shadow: 0 8px 24px rgba(230, 80, 60, 0.28);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(230, 80, 60, 0.32);
+      }
+
+      .btn-ghost {
+        border: 1px solid var(--line);
+        color: var(--accent-strong);
+        background: #fff7f0;
+      }
+
+      .btn-ghost:hover {
+        transform: translateY(-2px);
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+        margin-top: 26px;
+      }
+
+      .card {
+        padding: 22px 24px;
+        background: var(--card);
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        animation: rise 0.9s ease both;
+        animation-delay: var(--delay, 0.1s);
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: 20px;
+      }
+
+      .links {
+        display: grid;
+        gap: 12px;
+      }
+
+      .link-box {
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: #fff;
+        border: 1px dashed #e5c7b1;
+        font-family: "Menlo", "Consolas", "Courier New", monospace;
+        font-size: 13px;
+        word-break: break-all;
+      }
+
+      ul {
+        padding-left: 18px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .note {
+        margin-top: 12px;
+        font-size: 13px;
+        color: #6b5b4d;
+      }
+
+      footer {
+        margin-top: 26px;
+        font-size: 12px;
+        color: #7b6b5b;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 680px) {
+        header,
+        .card {
+          padding: 20px;
+        }
+        .cta {
+          flex-direction: column;
+        }
+        .btn {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="wrap">
+      <header>
+        <div class="badge">非官方 · 自动同步</div>
+        <h1>櫻坂46 日程日历</h1>
+        <p>
+          数据来自櫻坂46 官方日程页面，每 6 小时自动同步到公开日历。
+          适合长期订阅、自动更新，不需要手动导入。
+        </p>
+        <div class="cta">
+          <a
+            class="btn btn-primary"
+            href="https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics"
+            >订阅 ICS</a
+          >
+          <a
+            class="btn btn-ghost"
+            href="https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+            >添加到 Google Calendar</a
+          >
+        </div>
+        <p class="note">
+          提示：在浏览器打开 ICS 链接会下载文件，订阅请在日历应用里选择“通过网址添加”。
+        </p>
+      </header>
+
+      <div class="grid">
+        <section class="card" style="--delay: 0.12s">
+          <h2>订阅链接</h2>
+          <div class="links">
+            <div>
+              <strong>iCal / ICS 订阅</strong>
+              <div class="link-box">
+                https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics
+              </div>
+            </div>
+            <div>
+              <strong>Google Calendar 直接添加</strong>
+              <div class="link-box">
+                https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" style="--delay: 0.2s">
+          <h2>如何添加（不要导入）</h2>
+          <ul>
+            <li>Google Calendar 网页端：左侧「其他日历」→「+」→「通过网址」→ 粘贴 ICS 链接。</li>
+            <li>iPhone/iPad：设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历。</li>
+            <li>macOS：日历 App → 文件 → 新建日历订阅 → 粘贴 ICS 链接。</li>
+          </ul>
+        </section>
+
+        <section class="card" style="--delay: 0.28s">
+          <h2>更新频率与延迟</h2>
+          <ul>
+            <li>后台同步：约每 6 小时更新一次。</li>
+            <li>订阅端刷新：各客户端会有缓存，更新可能延迟数小时。</li>
+          </ul>
+        </section>
+
+        <section class="card" style="--delay: 0.36s">
+          <h2>免责声明</h2>
+          <p>
+            本项目为粉丝整理用途，非官方。日程以官方发布为准，如有错误欢迎反馈。
+          </p>
+        </section>
+      </div>
+
+      <footer>Powered by Sakurazaka46 schedule sync · Unofficial fan project</footer>
+    </div>
+  </body>
+</html>
