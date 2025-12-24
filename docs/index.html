@@ -290,16 +290,10 @@
             <li data-i18n="path_a_s4"></li>
             <li data-i18n="path_a_s5"></li>
           </ol>
-          <figure>
-            <img
-              class="screenshot"
-              src="assets/howto/android/step1.jpg"
-              alt="Android calendar example"
-              loading="lazy"
-            />
-            <figcaption data-i18n="path_a_img_note"></figcaption>
-          </figure>
           <p class="muted" data-i18n="path_a_tip"></p>
+          <p class="muted">
+            <a href="how_to_android.html" data-i18n="path_a_link"></a>
+          </p>
         </section>
 
         <section class="howto-card">
@@ -312,6 +306,7 @@
             <li data-i18n="path_b1_s2"></li>
             <li data-i18n="path_b1_s3"></li>
             <li data-i18n="path_b1_s4"></li>
+            <li data-i18n="path_b1_s5"></li>
           </ol>
           <p class="muted" data-i18n="path_b1_tip"></p>
           <p class="muted">
@@ -382,7 +377,7 @@
           tips: "浏览器打开 ICS 可能会下载文件，这是正常的；请在日历应用里用“通过网址/订阅”添加。",
           start_title: "如何添加（选一种方式即可）",
           start_note: "主要用 Google Calendar 选 A；用 iPhone/iPad 的 Apple 日历选 B。",
-          path_a_title: "A. Google 用户",
+          path_a_title: "A. Google Calendar",
           path_a_note:
             "适合 Android、Google Calendar 网页版、iOS 上的 Google Calendar App。更新通常更快。",
           path_a_s1: "点击“添加到 Google Calendar”。",
@@ -390,18 +385,20 @@
           path_a_s3: "成功后在 Google Calendar 左侧“其他日历”里能看到并勾选。",
           path_a_s4: "手机端在侧边栏勾选该日历。",
           path_a_s5: "若没出现，等几分钟或刷新。",
-          path_a_img_note: "Android 端示例",
           path_a_tip: "已经用 A 添加过，就不需要再订阅 ICS，避免重复。",
+          path_a_link: "Google Calendar（Android）设置方法",
           path_b_title: "B. iPhone / iPad（Apple 日历）",
-          path_b_note: "用“订阅”，不要“导入”。",
-          path_b1_title: "步骤",
-          path_b1_s1: "复制 ICS 链接。",
-          path_b1_s2:
-            "设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历。",
-          path_b1_s3: "粘贴 ICS 链接并订阅。",
-          path_b1_s4:
-            "打开“日历”App，在底部“日历/Calendars”里勾选显示。",
-          path_b1_tip: "不同 iOS 版本菜单略有差异，可在设置里搜索“日历/订阅”。",
+          path_b_note:
+            "iCal 格式（ICS 格式）：复制下方链接即可获得共享链接。如果你的日历应用支持 iCal/ICS 订阅，除了 Google Calendar 之外也能添加（例如 iPhone 自带“日历”、Outlook 等）。",
+          path_b1_title: "iPhone（自带“日历”App）添加示例",
+          path_b1_s1: "复制下方 ICS 链接。",
+          path_b1_s2: "打开设置，在顶部搜索“订阅”（或“日历”）。",
+          path_b1_s3: "进入“添加已订阅的日历”。",
+          path_b1_s4: "粘贴 ICS 链接并订阅。",
+          path_b1_s5:
+            "打开“日历”App，在底部“日历/Calendars”里勾选该订阅日历。",
+          path_b1_tip:
+            "提示：请使用“订阅”，不要使用“导入”。导入只会复制一次事件，后续不会自动更新。",
           path_b1_link_text: "Apple 支持：iPhone 订阅日历",
           path_b1_link_href:
             "https://support.apple.com/zh-cn/guide/iphone/iph3d1110d4/ios",
@@ -434,7 +431,7 @@
           tips: "瀏覽器直接開 ICS 可能會下載檔案，屬正常；請在行事曆 App 以「透過網址／訂閱」加入。",
           start_title: "如何加入（擇一即可）",
           start_note: "主要用 Google Calendar 選 A；用 iPhone/iPad 的 Apple 行事曆選 B。",
-          path_a_title: "A. Google 使用者",
+          path_a_title: "A. Google Calendar",
           path_a_note:
             "適合 Android、Google Calendar 網頁、iOS 的 Google Calendar App。更新通常較快。",
           path_a_s1: "點「加入 Google Calendar」。",
@@ -442,18 +439,20 @@
           path_a_s3: "成功後在 Google Calendar 左側「其他日曆」可看到並勾選。",
           path_a_s4: "手機端在側邊欄勾選該日曆。",
           path_a_s5: "若沒出現，稍等幾分鐘或重新整理。",
-          path_a_img_note: "Android 端示意畫面",
           path_a_tip: "用 A 加過就不需要再訂閱 ICS，避免重複。",
+          path_a_link: "Google Calendar（Android）設定方法",
           path_b_title: "B. iPhone / iPad（Apple 行事曆）",
-          path_b_note: "用「訂閱」，不要「匯入」。",
-          path_b1_title: "步驟",
-          path_b1_s1: "複製 ICS 連結。",
-          path_b1_s2:
-            "設定 → 行事曆 → 帳號 → 加入帳號 → 其他 → 加入已訂閱的行事曆。",
-          path_b1_s3: "貼上 ICS 連結並訂閱。",
-          path_b1_s4:
+          path_b_note:
+            "iCal 格式（ICS 格式）：複製下方連結即可取得共享連結。若行事曆 App 支援 iCal/ICS 訂閱，除了 Google Calendar 之外也可加入（例如 iPhone 內建「行事曆」、Outlook 等）。",
+          path_b1_title: "iPhone（內建「行事曆」App）設定示例",
+          path_b1_s1: "複製下方 ICS 連結。",
+          path_b1_s2: "打開設定，在頂部搜尋「訂閱」（或「行事曆」）。",
+          path_b1_s3: "進入「加入已訂閱的行事曆」。",
+          path_b1_s4: "貼上 ICS 連結並訂閱。",
+          path_b1_s5:
             "打開行事曆 App，在底部「行事曆/Calendars」勾選顯示。",
-          path_b1_tip: "不同 iOS 版本選單可能略有差異，可在設定搜尋「行事曆／訂閱」。",
+          path_b1_tip:
+            "提示：請使用「訂閱」，不要使用「匯入」。匯入只會複製一次事件，之後不會自動更新。",
           path_b1_link_text: "Apple 支援：iPhone 訂閱行事曆",
           path_b1_link_href:
             "https://support.apple.com/zh-tw/guide/iphone/iph3d1110d4/ios",
@@ -485,7 +484,7 @@
           start_title: "追加方法（どちらか一つ）",
           start_note:
             "Google カレンダー中心なら A、iPhone/iPad の Apple カレンダーなら B。",
-          path_a_title: "A. Google ユーザー",
+          path_a_title: "A. Google Calendar",
           path_a_note:
             "Android / Google カレンダー Web / iOS の Google カレンダー App 向け。反映が早いことが多いです。",
           path_a_s1: "「Google カレンダーに追加」をクリック。",
@@ -493,18 +492,21 @@
           path_a_s3: "追加後、左の「他のカレンダー」に表示されチェックできます。",
           path_a_s4: "スマホはサイドバーのカレンダー一覧で有効化。",
           path_a_s5: "出ない場合は数分待つか更新。",
-          path_a_img_note: "Android 画面例",
           path_a_tip: "A を使った場合、ICS は不要（重複防止）。",
+          path_a_link: "Googleカレンダーアプリへの設定方法(Android)",
           path_b_title: "B. iPhone / iPad（Apple カレンダー）",
-          path_b_note: "「購読」を使い、「Import」は使わない。",
-          path_b1_title: "手順",
-          path_b1_s1: "ICS リンクをコピー。",
+          path_b_note:
+            "iCal形式（ICS形式）：下のリンクをコピーすると共有リンクとして使えます。iCal/ICS の購読に対応していれば、Google カレンダー以外のアプリ（iPhone標準「カレンダー」、Outlook など）にも追加可能です。",
+          path_b1_title: "iPhone標準「カレンダー」アプリでの設定例",
+          path_b1_s1: "下記の ICS リンクをコピー。",
           path_b1_s2:
-            "設定 → カレンダー → アカウント → アカウント追加 → その他 → 照会カレンダーを追加。",
-          path_b1_s3: "ICS を貼り付けて追加。",
-          path_b1_s4: "カレンダー App の一覧でチェック。",
+            "iPhone の「設定」を開き、上部の検索で「照会」/「購読」（見つからない場合は「カレンダー」）を検索。",
+          path_b1_s3: "「照会カレンダーを追加」を開く。",
+          path_b1_s4: "ICS リンクを貼り付けて購読。",
+          path_b1_s5:
+            "「カレンダー」アプリを開き、下部の「カレンダー」一覧で表示をオン。",
           path_b1_tip:
-            "iOS バージョンで表記が違う場合があります。設定で「カレンダー/購読」を検索すると早いです。",
+            "注意：Import（取り込み）ではなく、購読（照会）で追加してください。取り込みは一度きりで自動更新されません。",
           path_b1_link_text: "Apple サポート：iPhone のカレンダー購読",
           path_b1_link_href:
             "https://support.apple.com/ja-jp/guide/iphone/iph3d1110d4/ios",
@@ -537,7 +539,7 @@
           tips: "Opening the ICS link may download a file — normal. Subscribe in your calendar app for updates.",
           start_title: "How to add (pick one)",
           start_note: "Use A for Google Calendar; use B for iPhone/iPad Apple Calendar.",
-          path_a_title: "A. Google users",
+          path_a_title: "A. Google Calendar",
           path_a_note:
             "Best for Android, Google Calendar web, and the Google Calendar app on iOS. Usually updates faster.",
           path_a_s1: "Click “Add to Google Calendar.”",
@@ -545,18 +547,21 @@
           path_a_s3: "It will appear under “Other calendars” on the left.",
           path_a_s4: "On mobile, enable it in the sidebar list.",
           path_a_s5: "If it doesn’t appear, wait a few minutes or refresh.",
-          path_a_img_note: "Android example",
           path_a_tip: "If you use A, you don’t need the ICS (avoids duplicates).",
+          path_a_link: "Google Calendar setup (Android)",
           path_b_title: "B. iPhone / iPad (Apple Calendar)",
-          path_b_note: "Use subscription, not import.",
-          path_b1_title: "Steps",
-          path_b1_s1: "Copy the ICS link.",
+          path_b_note:
+            "iCal (ICS) format: copy the link below to get the shared iCal/ICS URL. If your calendar app supports iCal/ICS subscriptions, you can add this calendar outside Google Calendar too (e.g., iPhone Calendar, Outlook).",
+          path_b1_title: "iPhone (built-in Calendar app) example",
+          path_b1_s1: "Copy the ICS link below.",
           path_b1_s2:
-            "Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar.",
-          path_b1_s3: "Paste the link and subscribe.",
-          path_b1_s4: "Open Calendar and enable it in the list.",
+            "Open Settings and search for “Subscription” (or “Calendar”).",
+          path_b1_s3: "Open “Add Subscribed Calendar.”",
+          path_b1_s4: "Paste the ICS link and subscribe.",
+          path_b1_s5:
+            "Open the Calendar app and enable it in the calendars list.",
           path_b1_tip:
-            "Menu names vary by iOS version; search “Calendar” or “Subscription” in Settings.",
+            "Note: use subscription, not import. Importing is one-time only and won’t auto-update.",
           path_b1_link_text: "Apple support: Subscribe to calendars on iPhone",
           path_b1_link_href:
             "https://support.apple.com/guide/iphone/iph3d1110d4/ios",
