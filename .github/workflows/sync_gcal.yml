@@ -1,0 +1,37 @@
+name: sync-gcal
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 */6 * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Write service account json
+        env:
+          GCAL_SA_JSON_B64: ${{ secrets.GCAL_SA_JSON_B64 }}
+        run: |
+          echo "$GCAL_SA_JSON_B64" | base64 --decode > service_account.json
+
+      - name: Sync to Google Calendar (all)
+        env:
+          GCAL_CALENDAR_ID: ${{ secrets.GCAL_CALENDAR_ID }}
+          GCAL_SERVICE_ACCOUNT_PATH: service_account.json
+          GCAL_TIMEZONE: Asia/Tokyo
+        run: |
+          python scripts/sync_gcal.py --cd all --months 8 --prune
