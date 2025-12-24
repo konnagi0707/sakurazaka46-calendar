@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>櫻坂46 日程日历（非官方）</title>
+    <title>櫻坂46 Google Calendar</title>
     <meta
       name="description"
-      content="櫻坂46 官网日程自动同步的订阅日历（非官方），支持 Google Calendar 与 iCal/ICS。"
+      content="櫻坂46 官方日程自动同步的订阅日历（非官方），支持 Google Calendar 与 iCal/ICS。"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,14 +16,13 @@
     />
     <style>
       :root {
-        --ink: #1a1f24;
-        --muted: #4a5560;
-        --accent: #e6503c;
-        --accent-strong: #b93b2b;
-        --paper: #fffaf4;
-        --card: #ffffffcc;
-        --line: #e7d9c8;
-        --shadow: 0 18px 60px rgba(20, 22, 26, 0.16);
+        color-scheme: light;
+        --ink: #101316;
+        --muted: #4e5660;
+        --line: #e6e6e6;
+        --accent: #0f6cb6;
+        --accent-ink: #0a4c82;
+        --paper: #ffffff;
       }
 
       * {
@@ -32,201 +31,145 @@
 
       body {
         margin: 0;
-        font-family: "Zen Kaku Gothic New", "Noto Sans JP", "PingFang SC",
-          "Microsoft YaHei", sans-serif;
+        background: radial-gradient(circle at top right, #f7fbff 0%, #ffffff 55%);
         color: var(--ink);
-        background: linear-gradient(135deg, #fce5cf 0%, #f9f0df 35%, #eaf4f1 100%);
-        min-height: 100vh;
-      }
-
-      body::before,
-      body::after {
-        content: "";
-        position: fixed;
-        inset: auto;
-        width: 42vmax;
-        height: 42vmax;
-        border-radius: 50%;
-        filter: blur(0px);
-        z-index: -2;
-        opacity: 0.6;
+        font-family: "Zen Kaku Gothic New", "Noto Sans JP", "Noto Sans CJK SC",
+          "PingFang SC", "Microsoft YaHei", sans-serif;
       }
 
       body::before {
-        top: -10vmax;
-        right: -12vmax;
-        background: radial-gradient(circle, #ffd3b6 0%, #ffb08a 40%, transparent 70%);
-      }
-
-      body::after {
-        bottom: -14vmax;
-        left: -10vmax;
-        background: radial-gradient(circle, #cfe6e2 0%, #9ccdc6 45%, transparent 72%);
-      }
-
-      .grain {
+        content: "";
         position: fixed;
         inset: 0;
-        background-image: repeating-linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 0.12) 0px,
-          rgba(255, 255, 255, 0.12) 1px,
-          transparent 1px,
-          transparent 6px
+        background-image: radial-gradient(
+          rgba(0, 0, 0, 0.04) 0.5px,
+          transparent 0.5px
         );
+        background-size: 22px 22px;
+        opacity: 0.5;
         pointer-events: none;
         z-index: -1;
-        opacity: 0.25;
       }
 
       .wrap {
-        max-width: 980px;
+        max-width: 880px;
         margin: 0 auto;
-        padding: 42px 18px 70px;
-      }
-
-      header {
-        display: grid;
-        gap: 18px;
-        padding: 36px 28px;
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        box-shadow: var(--shadow);
-        animation: rise 0.9s ease both;
-      }
-
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 13px;
-        padding: 6px 12px;
-        border-radius: 999px;
-        background: #fff2e6;
-        border: 1px solid #f3cbb2;
-        color: #8f3d2f;
-        width: fit-content;
+        padding: 32px 18px 90px;
+        animation: fade-up 0.7s ease both;
       }
 
       h1 {
-        margin: 0;
-        font-family: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
-        font-size: clamp(28px, 4vw, 44px);
-        letter-spacing: 0.04em;
+        font-family: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN",
+          serif;
+        font-size: clamp(22px, 3.5vw, 30px);
+        margin: 0 0 10px;
+        letter-spacing: 0.06em;
       }
 
-      p {
-        margin: 0;
+      p,
+      li {
+        line-height: 1.75;
+        margin: 8px 0;
+      }
+
+      .muted {
         color: var(--muted);
-        line-height: 1.7;
+        font-size: 13px;
       }
 
-      .cta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
+      .box {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        margin: 16px 0;
+        background: var(--paper);
+        box-shadow: 0 10px 26px rgba(18, 22, 26, 0.05);
       }
 
-      .btn {
+      code,
+      pre {
+        background: #f6f7f9;
+        border-radius: 8px;
+      }
+
+      code {
+        padding: 2px 6px;
+      }
+
+      pre {
+        padding: 10px 12px;
+        overflow: auto;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .btns a {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 12px 18px;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 600;
+        gap: 6px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        margin: 8px 10px 0 0;
+        color: var(--accent-ink);
+        background: #ffffff;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .btn-primary {
-        background: var(--accent);
-        color: #fffaf6;
-        box-shadow: 0 8px 24px rgba(230, 80, 60, 0.28);
+      .btns a:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 16px rgba(13, 74, 124, 0.12);
       }
 
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 28px rgba(230, 80, 60, 0.32);
-      }
-
-      .btn-ghost {
-        border: 1px solid var(--line);
-        color: var(--accent-strong);
-        background: #fff7f0;
-      }
-
-      .btn-ghost:hover {
-        transform: translateY(-2px);
-      }
-
-      .grid {
-        display: grid;
-        gap: 18px;
-        margin-top: 26px;
-      }
-
-      .card {
-        padding: 22px 24px;
-        background: var(--card);
-        border-radius: 18px;
-        border: 1px solid var(--line);
-        box-shadow: var(--shadow);
-        animation: rise 0.9s ease both;
-        animation-delay: var(--delay, 0.1s);
-      }
-
-      h2 {
-        margin: 0 0 12px;
-        font-size: 20px;
-      }
-
-      .links {
-        display: grid;
-        gap: 12px;
-      }
-
-      .calendar-frame {
+      iframe {
         width: 100%;
-        height: 760px;
+        height: 820px;
         border: 0;
-        border-radius: 16px;
-        background: #fff;
-      }
-
-      .link-box {
-        padding: 12px 14px;
         border-radius: 12px;
         background: #fff;
-        border: 1px dashed #e5c7b1;
-        font-family: "Menlo", "Consolas", "Courier New", monospace;
-        font-size: 13px;
-        word-break: break-all;
       }
 
-      ul {
-        padding-left: 18px;
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .note {
-        margin-top: 12px;
-        font-size: 13px;
-        color: #6b5b4d;
-      }
-
-      footer {
-        margin-top: 26px;
+      .lang {
+        position: fixed;
+        right: 14px;
+        bottom: 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(6px);
+        padding: 8px 10px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
         font-size: 12px;
-        color: #7b6b5b;
+        box-shadow: 0 8px 20px rgba(18, 22, 26, 0.08);
       }
 
-      @keyframes rise {
+      .lang button {
+        border: 0;
+        background: transparent;
+        padding: 6px 8px;
+        border-radius: 999px;
+        cursor: pointer;
+        color: var(--ink);
+      }
+
+      .lang button.active {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      @keyframes fade-up {
         from {
           opacity: 0;
-          transform: translateY(14px);
+          transform: translateY(12px);
         }
         to {
           opacity: 1;
@@ -234,113 +177,221 @@
         }
       }
 
-      @media (max-width: 680px) {
-        header,
-        .card {
-          padding: 20px;
+      @media (max-width: 640px) {
+        .btns a {
+          width: 100%;
+          justify-content: center;
         }
-        .cta {
-          flex-direction: column;
+
+        iframe {
+          height: 640px;
         }
-        .btn {
+
+        .lang {
+          flex-wrap: wrap;
           justify-content: center;
         }
       }
     </style>
   </head>
+
   <body>
-    <div class="grain" aria-hidden="true"></div>
     <div class="wrap">
-      <header>
-        <div class="badge">非官方 · 自动同步</div>
-        <h1>櫻坂46 日程日历</h1>
-        <p>
-          数据来自櫻坂46 官方日程页面，每 6 小时自动同步到公开日历。
-          适合长期订阅、自动更新，不需要手动导入。
-        </p>
-        <div class="cta">
-          <a
-            class="btn btn-primary"
-            href="https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics"
-            >订阅 ICS</a
-          >
-          <a
-            class="btn btn-ghost"
-            href="https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
-            >添加到 Google Calendar</a
-          >
-          <a class="btn btn-ghost" href="#preview">网页预览</a>
+      <h1 data-i18n="title"></h1>
+      <p class="muted" data-i18n="subtitle"></p>
+
+      <div class="box">
+        <p><b data-i18n="subscribe_heading"></b></p>
+
+        <p><b data-i18n="ics_label"></b></p>
+        <pre id="icsUrl"></pre>
+
+        <p><b data-i18n="gadd_label"></b></p>
+        <pre id="gAddUrl"></pre>
+
+        <div class="btns">
+          <a id="btnIcs" target="_blank" rel="noopener" data-i18n="btn_open_ics"></a>
+          <a id="btnGadd" target="_blank" rel="noopener" data-i18n="btn_add_gcal"></a>
         </div>
-        <p class="note">
-          提示：在浏览器打开 ICS 链接会下载文件，订阅请在日历应用里选择“通过网址添加”。
-        </p>
-      </header>
 
-      <div class="grid">
-        <section class="card" style="--delay: 0.12s">
-          <h2>订阅链接</h2>
-          <div class="links">
-            <div>
-              <strong>iCal / ICS 订阅</strong>
-              <div class="link-box">
-                https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics
-              </div>
-            </div>
-            <div>
-              <strong>Google Calendar 直接添加</strong>
-              <div class="link-box">
-                https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="card" style="--delay: 0.2s">
-          <h2>如何添加（不要导入）</h2>
-          <ul>
-            <li>Google Calendar 网页端：左侧「其他日历」→「+」→「通过网址」→ 粘贴 ICS 链接。</li>
-            <li>iPhone/iPad：设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历。</li>
-            <li>macOS：日历 App → 文件 → 新建日历订阅 → 粘贴 ICS 链接。</li>
-          </ul>
-        </section>
-
-        <section class="card" id="preview" style="--delay: 0.26s">
-          <h2>网页预览</h2>
-          <p>
-            这里是 Google Calendar 的公开嵌入预览（议程视图）。想看月历视图可
-            <a
-              href="https://calendar.google.com/calendar/embed?src=20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com&ctz=Asia%2FTokyo"
-              target="_blank"
-              rel="noopener"
-              >新窗口打开</a
-            >。
-          </p>
-          <div style="height: 14px"></div>
-          <iframe
-            class="calendar-frame"
-            src="https://calendar.google.com/calendar/embed?mode=AGENDA&src=20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com&ctz=Asia%2FTokyo"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </section>
-
-        <section class="card" style="--delay: 0.28s">
-          <h2>更新频率与延迟</h2>
-          <ul>
-            <li>后台同步：约每 6 小时更新一次。</li>
-            <li>订阅端刷新：各客户端会有缓存，更新可能延迟数小时。</li>
-          </ul>
-        </section>
-
-        <section class="card" style="--delay: 0.36s">
-          <h2>免责声明</h2>
-          <p>
-            本项目为粉丝整理用途，非官方。日程以官方发布为准，如有错误欢迎反馈。
-          </p>
-        </section>
+        <p class="muted" data-i18n="tips"></p>
       </div>
 
-      <footer>Powered by Sakurazaka46 schedule sync · Unofficial fan project</footer>
+      <p><b data-i18n="howto_title"></b></p>
+      <ul>
+        <li data-i18n="howto_google"></li>
+        <li data-i18n="howto_apple_ios"></li>
+        <li data-i18n="howto_apple_mac"></li>
+      </ul>
+
+      <p><b data-i18n="preview_title"></b></p>
+      <p class="muted" data-i18n="preview_note"></p>
+
+      <iframe id="embedFrame" scrolling="no" loading="lazy"></iframe>
+
+      <p class="muted" style="margin-top: 12px" data-i18n="update_note"></p>
+      <p class="muted" data-i18n="disclaimer"></p>
     </div>
+
+    <div class="lang" aria-label="Language Switcher">
+      <button data-lang="zh-CN">简体中文</button>
+      <button data-lang="zh-TW">繁體中文</button>
+      <button data-lang="ja">日本語</button>
+      <button data-lang="en">English</button>
+    </div>
+
+    <script>
+      const ICS_URL =
+        "https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics";
+
+      const GOOGLE_ADD_URL =
+        "https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t";
+
+      const CALENDAR_ID =
+        "20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea@group.calendar.google.com";
+
+      const EMBED_URL =
+        "https://calendar.google.com/calendar/embed?mode=AGENDA&src=" +
+        encodeURIComponent(CALENDAR_ID) +
+        "&ctz=" +
+        encodeURIComponent("Asia/Tokyo");
+
+      const I18N = {
+        "zh-CN": {
+          title: "櫻坂46 Google Calendar",
+          subtitle: "非官方 / 粉丝维护。数据来自櫻坂46官网日程，并由自动同步脚本定期更新。",
+          subscribe_heading: "订阅方式（推荐“订阅/通过网址添加”，不要导入 Import）",
+          ics_label: "1) iCal / ICS（通用订阅链接）",
+          gadd_label: "2) 添加到 Google Calendar（Google 用户更方便）",
+          btn_open_ics: "打开 ICS 链接",
+          btn_add_gcal: "添加到 Google Calendar",
+          tips: "提示：浏览器直接打开 ICS 可能会下载文件，这是正常的；订阅请在日历应用中选择“通过网址/订阅”添加，而不是“导入”。",
+          howto_title: "如何添加",
+          howto_google:
+            "Google Calendar 网页端：左侧“其他日历”→“+”→“通过网址”→粘贴 ICS 链接→添加。",
+          howto_apple_ios:
+            "iPhone/iPad（Apple 日历）：设置→日历→账户→添加账户→其他→添加已订阅的日历→粘贴 ICS 链接。",
+          howto_apple_mac:
+            "macOS（Apple 日历）：日历 App→文件→新建日历订阅→粘贴 ICS 链接。",
+          preview_title: "网页预览（Google 日历嵌入）",
+          preview_note: "若日历已公开为“查看所有活动详情”，这里会显示完整标题与描述。",
+          update_note:
+            "更新频率：后台约每 6 小时同步一次；订阅端刷新存在缓存延迟（由各日历客户端决定）。",
+          disclaimer: "免责声明：本项目为非官方信息整理，日程以官方发布为准。",
+        },
+        "zh-TW": {
+          title: "櫻坂46 Google Calendar",
+          subtitle: "非官方／粉絲維護。資料來自櫻坂46官網行程，並由自動同步程式定期更新。",
+          subscribe_heading: "訂閱方式（建議用「訂閱／透過網址加入」，不要用匯入 Import）",
+          ics_label: "1) iCal / ICS（通用訂閱連結）",
+          gadd_label: "2) 加入 Google Calendar（Google 使用者較方便）",
+          btn_open_ics: "開啟 ICS 連結",
+          btn_add_gcal: "加入 Google Calendar",
+          tips: "提示：在瀏覽器直接打開 ICS 可能會下載檔案，這是正常的；請在日曆應用中選擇「透過網址／訂閱」加入，而不是「匯入」。",
+          howto_title: "如何加入",
+          howto_google:
+            "Google Calendar 網頁：左側「其他日曆」→「+」→「透過網址」→貼上 ICS 連結→加入。",
+          howto_apple_ios:
+            "iPhone/iPad（Apple 行事曆）：設定→行事曆→帳號→加入帳號→其他→加入已訂閱的行事曆→貼上 ICS 連結。",
+          howto_apple_mac:
+            "macOS（Apple 行事曆）：行事曆 App→檔案→新增行事曆訂閱→貼上 ICS 連結。",
+          preview_title: "網頁預覽（Google 行事曆嵌入）",
+          preview_note: "若行事曆已公開為「查看所有活動詳細資料」，此處會顯示完整標題與描述。",
+          update_note:
+            "更新頻率：後台約每 6 小時同步一次；訂閱端刷新可能有快取延遲（由各日曆客戶端決定）。",
+          disclaimer: "免責聲明：本專案為非官方資訊整理，行程以官方公告為準。",
+        },
+        ja: {
+          title: "櫻坂46 Google Calendar",
+          subtitle: "非公式／ファン運営。櫻坂46公式スケジュールをもとに、自動同期で定期更新しています。",
+          subscribe_heading: "追加方法（Import ではなく「購読／URL 追加」を推奨）",
+          ics_label: "1) iCal / ICS（汎用購読リンク）",
+          gadd_label: "2) Google Calendar に追加（Google ユーザー向け）",
+          btn_open_ics: "ICS を開く",
+          btn_add_gcal: "Google Calendar に追加",
+          tips: "注意：ブラウザで ICS を開くとダウンロードされることがあります（正常です）。購読はカレンダーアプリの「URL から追加／購読」を使用してください。",
+          howto_title: "追加手順",
+          howto_google:
+            "Google Calendar（Web）：左「他のカレンダー」→「+」→「URL から」→ICS を貼り付け→追加。",
+          howto_apple_ios:
+            "iPhone/iPad（カレンダー）：設定→カレンダー→アカウント→アカウント追加→その他→照会カレンダーを追加→ICS を貼り付け。",
+          howto_apple_mac:
+            "macOS（カレンダー）：カレンダー App→ファイル→新規カレンダー照会→ICS を貼り付け。",
+          preview_title: "プレビュー（Google カレンダー埋め込み）",
+          preview_note:
+            "カレンダーが「予定の詳細を表示」で公開されている場合、タイトルと説明が表示されます。",
+          update_note:
+            "更新：バックエンドは約 6 時間ごとに同期。購読側の反映はクライアントの更新間隔に依存します。",
+          disclaimer: "免責：非公式の整理ページです。最終的には公式発表をご確認ください。",
+        },
+        en: {
+          title: "Sakurazaka46 Google Calendar",
+          subtitle:
+            "Unofficial / fan-maintained. Data is sourced from the official schedule and synced automatically on a regular basis.",
+          subscribe_heading: "How to add (Use subscription / add-by-URL, not import)",
+          ics_label: "1) iCal / ICS (universal subscription link)",
+          gadd_label: "2) Add to Google Calendar (recommended for Google users)",
+          btn_open_ics: "Open ICS link",
+          btn_add_gcal: "Add to Google Calendar",
+          tips: "Note: Opening the ICS link in a browser may download a file (expected). For auto-updates, subscribe/add by URL in your calendar app instead of importing.",
+          howto_title: "How to add",
+          howto_google:
+            "Google Calendar (Web): “Other calendars” → “+” → “From URL” → paste the ICS link → Add.",
+          howto_apple_ios:
+            "iPhone/iPad (Apple Calendar): Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar → paste the ICS link.",
+          howto_apple_mac:
+            "macOS (Apple Calendar): Calendar app → File → New Calendar Subscription → paste the ICS link.",
+          preview_title: "Preview (embedded Google Calendar)",
+          preview_note:
+            "If the calendar is public with full event details, titles and descriptions will be visible here.",
+          update_note:
+            "Update frequency: backend sync runs about every 6 hours; subscriber refresh delay depends on each calendar client.",
+          disclaimer:
+            "Disclaimer: This is an unofficial page. Please refer to the official announcements for final details.",
+        },
+      };
+
+      function normalizeLang(lang) {
+        const supported = ["zh-CN", "zh-TW", "ja", "en"];
+        if (supported.includes(lang)) return lang;
+        const l = (lang || "").toLowerCase();
+        if (l.startsWith("zh-tw") || l.startsWith("zh-hk")) return "zh-TW";
+        if (l.startsWith("zh")) return "zh-CN";
+        if (l.startsWith("ja")) return "ja";
+        return "en";
+      }
+
+      function setLang(lang) {
+        const L = normalizeLang(lang);
+        localStorage.setItem("site_lang", L);
+        document.documentElement.lang = L;
+        document.title = I18N[L].title;
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (I18N[L][key] != null) el.textContent = I18N[L][key];
+        });
+
+        document.getElementById("icsUrl").textContent = ICS_URL;
+        document.getElementById("gAddUrl").textContent = GOOGLE_ADD_URL;
+        document.getElementById("btnIcs").href = ICS_URL;
+        document.getElementById("btnGadd").href = GOOGLE_ADD_URL;
+        document.getElementById("embedFrame").src = EMBED_URL;
+
+        document.querySelectorAll(".lang button").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.lang === L);
+        });
+      }
+
+      (function init() {
+        const stored = localStorage.getItem("site_lang");
+        const browser = navigator.language || "en";
+        setLang(stored || browser);
+
+        document.querySelectorAll(".lang button").forEach((btn) => {
+          btn.addEventListener("click", () => setLang(btn.dataset.lang));
+        });
+      })();
+    </script>
   </body>
 </html>
