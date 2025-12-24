@@ -83,6 +83,10 @@ def build_body(ev: g.Event, tz: dt.tzinfo, tz_name: str) -> dict:
         "description": ev.description,
         "start": start,
         "end": end,
+        "source": {
+            "title": "Sakurazaka46 Official Schedule",
+            "url": ev.source_url,
+        },
         "extendedProperties": {
             "private": {
                 MANAGED_KEY: MANAGED_VAL,

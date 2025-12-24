@@ -5,7 +5,7 @@ import re
 import time
 from dataclasses import dataclass
 from typing import Iterable, List, Optional, Tuple
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -70,6 +70,11 @@ def fetch(url: str) -> str:
 
 def extract_schedule_lines(html: str) -> List[str]:
     soup = BeautifulSoup(html, "html.parser")
+    for link in soup.find_all("a", href=True):
+        href = urljoin(BASE_URL, link["href"])
+        label = link.get_text(" ", strip=True)
+        replacement = f"{label}: {href}" if label else href
+        link.replace_with(replacement)
     text = soup.get_text("\n", strip=True)
     return [ln.strip() for ln in text.splitlines() if ln.strip()]
 
@@ -191,10 +196,6 @@ def parse_events_from_lines(lines: List[str], source_url: str) -> List[Event]:
             desc_lines = block[title_idx + 1 :]
 
         description = "\n".join(desc_lines).strip()
-        if description:
-            description = f"{description}\n\nSource: {source_url}"
-        else:
-            description = f"Source: {source_url}"
 
         if time_tuple is None:
             start = base_date
@@ -252,6 +253,7 @@ def to_ics(events: Iterable[Event]) -> str:
         out.append(f"UID:{ev.uid}")
         out.append(f"DTSTAMP:{now}")
         out.append(f"SUMMARY:{ics_escape(ev.summary)}")
+        out.append(f"URL:{ics_escape(ev.source_url)}")
         out.append(f"DESCRIPTION:{ics_escape(ev.description)}")
 
         if ev.all_day:
