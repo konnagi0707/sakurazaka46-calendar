@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>櫻坂46 Google Calendar</title>
+    <title>櫻坂46 日程日历</title>
     <meta
       name="description"
       content="櫻坂46 官方日程自动同步的订阅日历（非官方），支持 Google Calendar 与 iCal/ICS。"
@@ -52,7 +52,7 @@
       }
 
       .wrap {
-        max-width: 880px;
+        max-width: 920px;
         margin: 0 auto;
         padding: 32px 18px 90px;
         animation: fade-up 0.7s ease both;
@@ -66,10 +66,25 @@
         letter-spacing: 0.06em;
       }
 
+      h2 {
+        margin: 24px 0 10px;
+        font-size: 18px;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+
       p,
       li {
         line-height: 1.75;
         margin: 8px 0;
+      }
+
+      ol {
+        margin: 8px 0 0;
+        padding-left: 18px;
       }
 
       .muted {
@@ -126,6 +141,25 @@
       .btns a:hover {
         transform: translateY(-1px);
         box-shadow: 0 8px 16px rgba(13, 74, 124, 0.12);
+      }
+
+      .howto-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin: 12px 0 18px;
+      }
+
+      .howto-card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        background: var(--paper);
+        box-shadow: 0 10px 26px rgba(18, 22, 26, 0.05);
+      }
+
+      .howto-card ol {
+        margin-bottom: 8px;
       }
 
       iframe {
@@ -203,32 +237,83 @@
       <div class="box">
         <p><b data-i18n="subscribe_heading"></b></p>
 
-        <p><b data-i18n="ics_label"></b></p>
-        <pre id="icsUrl"></pre>
-
         <p><b data-i18n="gadd_label"></b></p>
         <pre id="gAddUrl"></pre>
 
+        <p><b data-i18n="ics_label"></b></p>
+        <pre id="icsUrl"></pre>
+
         <div class="btns">
-          <a id="btnIcs" target="_blank" rel="noopener" data-i18n="btn_open_ics"></a>
           <a id="btnGadd" target="_blank" rel="noopener" data-i18n="btn_add_gcal"></a>
+          <a id="btnIcs" target="_blank" rel="noopener" data-i18n="btn_open_ics"></a>
         </div>
 
         <p class="muted" data-i18n="tips"></p>
       </div>
 
-      <p><b data-i18n="howto_title"></b></p>
-      <ul>
-        <li data-i18n="howto_google"></li>
-        <li data-i18n="howto_apple_ios"></li>
-        <li data-i18n="howto_apple_mac"></li>
-      </ul>
+      <h2 data-i18n="start_title"></h2>
+      <p class="muted" data-i18n="start_note"></p>
+
+      <div class="howto-grid">
+        <section class="howto-card">
+          <h3 data-i18n="path_a_title"></h3>
+          <p class="muted" data-i18n="path_a_note"></p>
+          <ol>
+            <li data-i18n="path_a_s1"></li>
+            <li data-i18n="path_a_s2"></li>
+            <li data-i18n="path_a_s3"></li>
+            <li data-i18n="path_a_s4"></li>
+            <li data-i18n="path_a_s5"></li>
+          </ol>
+          <p class="muted" data-i18n="path_a_tip"></p>
+        </section>
+
+        <section class="howto-card">
+          <h3 data-i18n="path_b_title"></h3>
+          <p class="muted" data-i18n="path_b_note"></p>
+
+          <p><b data-i18n="path_b1_title"></b></p>
+          <ol>
+            <li data-i18n="path_b1_s1"></li>
+            <li data-i18n="path_b1_s2"></li>
+            <li data-i18n="path_b1_s3"></li>
+            <li data-i18n="path_b1_s4"></li>
+          </ol>
+
+          <p><b data-i18n="path_b2_title"></b></p>
+          <ol>
+            <li data-i18n="path_b2_s1"></li>
+            <li data-i18n="path_b2_s2"></li>
+            <li data-i18n="path_b2_s3"></li>
+            <li data-i18n="path_b2_s4"></li>
+          </ol>
+
+          <p><b data-i18n="path_b3_title"></b></p>
+          <ol>
+            <li data-i18n="path_b3_s1"></li>
+            <li data-i18n="path_b3_s2"></li>
+            <li data-i18n="path_b3_s3"></li>
+            <li data-i18n="path_b3_s4"></li>
+          </ol>
+        </section>
+      </div>
+
+      <div class="box">
+        <h3 data-i18n="path_c_title"></h3>
+        <ul>
+          <li data-i18n="path_c_1"></li>
+          <li data-i18n="path_c_2"></li>
+          <li data-i18n="path_c_3"></li>
+          <li data-i18n="path_c_4"></li>
+        </ul>
+      </div>
+
       <p class="muted" data-i18n="guide_note"></p>
       <p>
         <a href="how_to_android.html" data-i18n="guide_android"></a>
       </p>
 
-      <p><b data-i18n="preview_title"></b></p>
+      <h2 data-i18n="preview_title"></h2>
       <p class="muted" data-i18n="preview_note"></p>
 
       <iframe id="embedFrame" scrolling="no" loading="lazy"></iframe>
@@ -262,104 +347,201 @@
 
       const I18N = {
         "zh-CN": {
-          title: "櫻坂46 Google Calendar",
-          subtitle: "非官方 / 粉丝维护。数据来自櫻坂46官网日程，并由自动同步脚本定期更新。",
-          subscribe_heading: "订阅方式（推荐“订阅/通过网址添加”，不要导入 Import）",
-          ics_label: "1) iCal / ICS（通用订阅链接）",
-          gadd_label: "2) 添加到 Google Calendar（Google 用户更方便）",
-          btn_open_ics: "打开 ICS 链接",
+          title: "櫻坂46 日程日历",
+          subtitle: "非官方 / 粉丝维护。来自官网日程，自动同步更新。",
+          subscribe_heading: "订阅链接（用“订阅/通过网址添加”，不要“导入”）",
+          gadd_label: "添加到 Google Calendar（推荐）",
+          ics_label: "ICS 订阅链接（通用）",
           btn_add_gcal: "添加到 Google Calendar",
-          tips: "提示：浏览器直接打开 ICS 可能会下载文件，这是正常的；订阅请在日历应用中选择“通过网址/订阅”添加，而不是“导入”。",
-        howto_title: "如何添加",
-        howto_google:
-          "Google Calendar 网页端：左侧“其他日历”→“+”→“通过网址”→粘贴 ICS 链接→添加。",
-        howto_apple_ios:
-          "iPhone/iPad（Apple 日历）：设置→日历→账户→添加账户→其他→添加已订阅的日历→粘贴 ICS 链接。",
-        howto_apple_mac:
-          "macOS（Apple 日历）：日历 App→文件→新建日历订阅→粘贴 ICS 链接。",
-        guide_note: "详细图文教程（可按设备查看）：",
-        guide_android: "Android 设定方法",
-        preview_title: "网页预览（Google 日历嵌入）",
-        preview_note: "若日历已公开为“查看所有活动详情”，这里会显示完整标题与描述。",
-        update_note:
-            "更新频率：后台约每 6 小时同步一次；订阅端刷新存在缓存延迟（由各日历客户端决定）。",
-          disclaimer: "免责声明：本项目为非官方信息整理，日程以官方发布为准。",
+          btn_open_ics: "打开 ICS",
+          tips: "浏览器打开 ICS 会下载文件是正常的，订阅请在日历应用里添加。",
+          start_title: "怎么添加",
+          start_note: "选你常用的日历走一条路就行，不要两条都加。",
+          path_a_title: "A. Google 用户（推荐）",
+          path_a_note: "Android / Google Calendar 用这条，更新更快。",
+          path_a_s1: "点上面的“添加到 Google Calendar”。",
+          path_a_s2: "需要登录就先登录。",
+          path_a_s3: "页面里点“添加/订阅”。",
+          path_a_s4: "网页版左侧“其他日历”里会出现并已勾选。",
+          path_a_s5: "手机 App 勾选该日历；没看到就等几分钟或下拉刷新。",
+          path_a_tip: "用 A 方式后一般不用再订阅 ICS。",
+          path_b_title: "B. Apple / Outlook / 其它（订阅 ICS）",
+          path_b_note: "适合 Apple 日历、Outlook 等支持订阅的应用。",
+          path_b1_title: "B1. iPhone / iPad（Apple 日历）",
+          path_b1_s1: "复制 ICS 链接。",
+          path_b1_s2: "设置 → 日历 → 账户 → 添加账户 → 其他 → 添加已订阅的日历。",
+          path_b1_s3: "粘贴链接并订阅。",
+          path_b1_s4: "打开日历 App，在列表勾选显示。",
+          path_b2_title: "B2. macOS（Apple 日历）",
+          path_b2_s1: "日历 App → 文件 → 新建日历订阅。",
+          path_b2_s2: "粘贴 ICS 链接并订阅。",
+          path_b2_s3: "刷新频率按需，位置可选 iCloud。",
+          path_b2_s4: "左侧列表勾选该订阅。",
+          path_b3_title: "B3. Google 网页端通过 ICS（不推荐但可用）",
+          path_b3_s1: "打开 calendar.google.com。",
+          path_b3_s2: "左侧“其他日历” → “+” → “通过网址”。",
+          path_b3_s3: "粘贴 ICS 链接并添加。",
+          path_b3_s4: "回到手机 App 等待同步。",
+          path_c_title: "不要导入 + 常见问题",
+          path_c_1: "导入只复制一次，后续不会自动更新。",
+          path_c_2: "更新慢：订阅端有缓存，稍等就好。",
+          path_c_3: "重复事件：不要同时用 A 和 B，或删掉导入那份。",
+          path_c_4: "时间不对：检查时区（建议 Asia/Tokyo）。",
+          guide_note: "图文教程：",
+          guide_android: "Android 详细步骤",
+          preview_title: "网页预览",
+          preview_note: "公开日历的嵌入预览。",
+          update_note: "后台约每 6 小时同步；客户端刷新时间由各日历决定。",
+          disclaimer: "非官方项目，日程以官方为准。",
         },
         "zh-TW": {
-          title: "櫻坂46 Google Calendar",
-          subtitle: "非官方／粉絲維護。資料來自櫻坂46官網行程，並由自動同步程式定期更新。",
-          subscribe_heading: "訂閱方式（建議用「訂閱／透過網址加入」，不要用匯入 Import）",
-          ics_label: "1) iCal / ICS（通用訂閱連結）",
-          gadd_label: "2) 加入 Google Calendar（Google 使用者較方便）",
-          btn_open_ics: "開啟 ICS 連結",
+          title: "櫻坂46 行程日曆",
+          subtitle: "非官方／粉絲維護。資料來自官網行程，定期自動更新。",
+          subscribe_heading: "訂閱連結（用「訂閱／透過網址加入」，不要「匯入」）",
+          gadd_label: "加入 Google Calendar（推薦）",
+          ics_label: "ICS 訂閱連結（通用）",
           btn_add_gcal: "加入 Google Calendar",
-          tips: "提示：在瀏覽器直接打開 ICS 可能會下載檔案，這是正常的；請在日曆應用中選擇「透過網址／訂閱」加入，而不是「匯入」。",
-        howto_title: "如何加入",
-        howto_google:
-          "Google Calendar 網頁：左側「其他日曆」→「+」→「透過網址」→貼上 ICS 連結→加入。",
-        howto_apple_ios:
-          "iPhone/iPad（Apple 行事曆）：設定→行事曆→帳號→加入帳號→其他→加入已訂閱的行事曆→貼上 ICS 連結。",
-        howto_apple_mac:
-          "macOS（Apple 行事曆）：行事曆 App→檔案→新增行事曆訂閱→貼上 ICS 連結。",
-        guide_note: "詳細圖文教學（依裝置選擇）：",
-        guide_android: "Android 設定方法",
-        preview_title: "網頁預覽（Google 行事曆嵌入）",
-        preview_note: "若行事曆已公開為「查看所有活動詳細資料」，此處會顯示完整標題與描述。",
-        update_note:
-            "更新頻率：後台約每 6 小時同步一次；訂閱端刷新可能有快取延遲（由各日曆客戶端決定）。",
-          disclaimer: "免責聲明：本專案為非官方資訊整理，行程以官方公告為準。",
+          btn_open_ics: "開啟 ICS",
+          tips: "提示：瀏覽器開啟 ICS 會下載檔案是正常的；要訂閱請在日曆 App 內加入。",
+          start_title: "怎麼加",
+          start_note: "選你常用的日曆走一條路就好，別兩條都加。",
+          path_a_title: "A. Google 使用者（推薦）",
+          path_a_note: "Android / Google Calendar 用這條，更新通常更快。",
+          path_a_s1: "點上面的「加入 Google Calendar」。",
+          path_a_s2: "需要登入就先登入。",
+          path_a_s3: "頁面按「加入／訂閱」。",
+          path_a_s4: "網頁版左側「其他日曆」可看到並已勾選。",
+          path_a_s5: "手機 App 勾選該日曆；沒看到就等幾分鐘或下拉刷新。",
+          path_a_tip: "用 A 方式後通常不用再訂閱 ICS。",
+          path_b_title: "B. Apple / Outlook / 其他（訂閱 ICS）",
+          path_b_note: "適合 Apple 行事曆、Outlook 等支援訂閱的 App。",
+          path_b1_title: "B1. iPhone / iPad（Apple 行事曆）",
+          path_b1_s1: "複製 ICS 連結。",
+          path_b1_s2: "設定 → 行事曆 → 帳號 → 加入帳號 → 其他 → 加入已訂閱的行事曆。",
+          path_b1_s3: "貼上連結並訂閱。",
+          path_b1_s4: "打開行事曆 App，在列表勾選顯示。",
+          path_b2_title: "B2. macOS（Apple 行事曆）",
+          path_b2_s1: "行事曆 App → 檔案 → 新增行事曆訂閱。",
+          path_b2_s2: "貼上 ICS 連結並訂閱。",
+          path_b2_s3: "刷新頻率按需；位置可選 iCloud。",
+          path_b2_s4: "左側列表勾選該訂閱。",
+          path_b3_title: "B3. Google 網頁端用 ICS（不推薦但可用）",
+          path_b3_s1: "開啟 calendar.google.com。",
+          path_b3_s2: "左側「其他日曆」 → 「+」 → 「透過網址」。",
+          path_b3_s3: "貼上 ICS 連結並加入。",
+          path_b3_s4: "回到手機 App 等待同步。",
+          path_c_title: "不要匯入 + 常見問題",
+          path_c_1: "匯入只會複製一次，之後不會自動更新。",
+          path_c_2: "更新慢：訂閱端有快取，稍等就好。",
+          path_c_3: "重複事件：不要同時用 A 與 B，或刪掉匯入那份。",
+          path_c_4: "時間不對：確認時區（建議 Asia/Tokyo）。",
+          guide_note: "圖文教學：",
+          guide_android: "Android 詳細步驟",
+          preview_title: "網頁預覽",
+          preview_note: "公開日曆的嵌入預覽。",
+          update_note: "後台約每 6 小時同步；用戶端更新時間視日曆 App 而定。",
+          disclaimer: "非官方專案，行程以官方公告為準。",
         },
         ja: {
-          title: "櫻坂46 Google Calendar",
-          subtitle: "非公式／ファン運営。櫻坂46公式スケジュールをもとに、自動同期で定期更新しています。",
-          subscribe_heading: "追加方法（Import ではなく「購読／URL 追加」を推奨）",
-          ics_label: "1) iCal / ICS（汎用購読リンク）",
-          gadd_label: "2) Google Calendar に追加（Google ユーザー向け）",
-          btn_open_ics: "ICS を開く",
+          title: "櫻坂46 スケジュールカレンダー",
+          subtitle: "非公式のファン運営。公式日程をもとに自動更新しています。",
+          subscribe_heading: "リンク（Import ではなく購読/URL 追加）",
+          gadd_label: "Google Calendar に追加（おすすめ）",
+          ics_label: "ICS 購読リンク（汎用）",
           btn_add_gcal: "Google Calendar に追加",
-          tips: "注意：ブラウザで ICS を開くとダウンロードされることがあります（正常です）。購読はカレンダーアプリの「URL から追加／購読」を使用してください。",
-        howto_title: "追加手順",
-        howto_google:
-          "Google Calendar（Web）：左「他のカレンダー」→「+」→「URL から」→ICS を貼り付け→追加。",
-        howto_apple_ios:
-          "iPhone/iPad（カレンダー）：設定→カレンダー→アカウント→アカウント追加→その他→照会カレンダーを追加→ICS を貼り付け。",
-        howto_apple_mac:
-          "macOS（カレンダー）：カレンダー App→ファイル→新規カレンダー照会→ICS を貼り付け。",
-        guide_note: "詳細ガイド：",
-        guide_android: "Android 設定方法",
-        preview_title: "プレビュー（Google カレンダー埋め込み）",
-        preview_note:
-          "カレンダーが「予定の詳細を表示」で公開されている場合、タイトルと説明が表示されます。",
-        update_note:
-            "更新：バックエンドは約 6 時間ごとに同期。購読側の反映はクライアントの更新間隔に依存します。",
-          disclaimer: "免責：非公式の整理ページです。最終的には公式発表をご確認ください。",
+          btn_open_ics: "ICS を開く",
+          tips: "ブラウザで ICS を開くとダウンロードされます。購読はアプリから追加してください。",
+          start_title: "追加の流れ",
+          start_note: "普段使うカレンダーに合わせて、どちらか一つだけ追加してください。",
+          path_a_title: "A. Google ユーザー向け（推奨）",
+          path_a_note: "Android / Google Calendar はこの方法が早いです。",
+          path_a_s1: "上の「Google Calendar に追加」を開く。",
+          path_a_s2: "ログインが必要ならログイン。",
+          path_a_s3: "画面で「追加/登録」を押す。",
+          path_a_s4: "Web の「他のカレンダー」に表示されチェックが入る。",
+          path_a_s5: "アプリで表示をON。出なければ少し待つ。",
+          path_a_tip: "A を使ったら ICS は不要です。",
+          path_b_title: "B. Apple / Outlook / その他（ICS を購読）",
+          path_b_note: "購読対応のカレンダーアプリ向け。",
+          path_b1_title: "B1. iPhone / iPad（カレンダー）",
+          path_b1_s1: "ICS リンクをコピー。",
+          path_b1_s2:
+            "設定 → カレンダー → アカウント → アカウント追加 → その他 → 照会カレンダーを追加。",
+          path_b1_s3: "リンクを貼り付けて追加。",
+          path_b1_s4: "カレンダーアプリで表示をONにする。",
+          path_b2_title: "B2. macOS（カレンダー）",
+          path_b2_s1: "カレンダー App → ファイル → 新規カレンダー照会。",
+          path_b2_s2: "ICS を貼り付けて追加。",
+          path_b2_s3: "更新頻度や保存先（iCloud など）を設定。",
+          path_b2_s4: "左の一覧でチェックを入れる。",
+          path_b3_title: "B3. Google Web から ICS 追加（非推奨）",
+          path_b3_s1: "calendar.google.com を開く。",
+          path_b3_s2: "左の「他のカレンダー」→「+」→「URL から」。",
+          path_b3_s3: "ICS を貼り付けて追加。",
+          path_b3_s4: "アプリに反映されるまで待つ。",
+          path_c_title: "Import しない + よくあること",
+          path_c_1: "Import は一度きりのコピーで、自動更新されません。",
+          path_c_2: "更新が遅い：購読側のキャッシュのため、少し待ってください。",
+          path_c_3: "重複：A と B を同時に入れない／Import 分を削除。",
+          path_c_4: "時間がずれる：タイムゾーンを確認（Asia/Tokyo 推奨）。",
+          guide_note: "詳しいガイド：",
+          guide_android: "Android の手順",
+          preview_title: "プレビュー",
+          preview_note: "公開カレンダーの埋め込み表示です。",
+          update_note: "同期は約 6 時間ごと。反映は各アプリの更新間隔に依存します。",
+          disclaimer: "非公式ページです。最終的には公式発表をご確認ください。",
         },
         en: {
-          title: "Sakurazaka46 Google Calendar",
+          title: "Sakurazaka46 Schedule Calendar",
           subtitle:
-            "Unofficial / fan-maintained. Data is sourced from the official schedule and synced automatically on a regular basis.",
-          subscribe_heading: "How to add (Use subscription / add-by-URL, not import)",
-          ics_label: "1) iCal / ICS (universal subscription link)",
-          gadd_label: "2) Add to Google Calendar (recommended for Google users)",
-          btn_open_ics: "Open ICS link",
+            "Unofficial fan project. Data comes from the official schedule and is synced regularly.",
+          subscribe_heading: "Links (use subscription/add-by-URL, not import)",
+          gadd_label: "Add to Google Calendar (recommended)",
+          ics_label: "ICS subscription link (universal)",
           btn_add_gcal: "Add to Google Calendar",
-          tips: "Note: Opening the ICS link in a browser may download a file (expected). For auto-updates, subscribe/add by URL in your calendar app instead of importing.",
-        howto_title: "How to add",
-        howto_google:
-          "Google Calendar (Web): “Other calendars” → “+” → “From URL” → paste the ICS link → Add.",
-        howto_apple_ios:
-          "iPhone/iPad (Apple Calendar): Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar → paste the ICS link.",
-        howto_apple_mac:
-          "macOS (Apple Calendar): Calendar app → File → New Calendar Subscription → paste the ICS link.",
-        guide_note: "Detailed guides (by device):",
-        guide_android: "Android setup guide",
-        preview_title: "Preview (embedded Google Calendar)",
-        preview_note:
-          "If the calendar is public with full event details, titles and descriptions will be visible here.",
-        update_note:
-            "Update frequency: backend sync runs about every 6 hours; subscriber refresh delay depends on each calendar client.",
+          btn_open_ics: "Open ICS",
+          tips: "Opening the ICS link in a browser may download a file. Subscribe in your calendar app for auto-updates.",
+          start_title: "Getting started",
+          start_note: "Choose one path based on your main calendar. Don't add both.",
+          path_a_title: "A. Google users (recommended)",
+          path_a_note: "Best for Android / Google Calendar, usually updates fastest.",
+          path_a_s1: "Click “Add to Google Calendar” above.",
+          path_a_s2: "Sign in if prompted.",
+          path_a_s3: "On the page, click Add/Subscribe.",
+          path_a_s4: "Web check: it appears under “Other calendars” and is checked.",
+          path_a_s5: "In the app, enable the calendar; wait a few minutes if it doesn't show.",
+          path_a_tip: "If you use A, you usually don't need the ICS.",
+          path_b_title: "B. Apple / Outlook / others (subscribe via ICS)",
+          path_b_note: "For apps that support calendar subscriptions.",
+          path_b1_title: "B1. iPhone / iPad (Apple Calendar)",
+          path_b1_s1: "Copy the ICS link.",
+          path_b1_s2:
+            "Settings → Calendar → Accounts → Add Account → Other → Add Subscribed Calendar.",
+          path_b1_s3: "Paste the link and subscribe.",
+          path_b1_s4: "Open Calendar and enable the subscription.",
+          path_b2_title: "B2. macOS (Apple Calendar)",
+          path_b2_s1: "Calendar app → File → New Calendar Subscription.",
+          path_b2_s2: "Paste the ICS link and subscribe.",
+          path_b2_s3: "Set refresh rate and location (iCloud recommended).",
+          path_b2_s4: "Enable it in the sidebar list.",
+          path_b3_title: "B3. Google web via ICS (not recommended)",
+          path_b3_s1: "Open calendar.google.com.",
+          path_b3_s2: "Other calendars → “+” → From URL.",
+          path_b3_s3: "Paste the ICS link and add.",
+          path_b3_s4: "Wait for the app to sync.",
+          path_c_title: "Don't import + common issues",
+          path_c_1: "Import only copies events once; it won't auto-update.",
+          path_c_2: "Updates aren't immediate: subscriptions are cached.",
+          path_c_3: "Duplicates: don't add both A and B, or remove imported events.",
+          path_c_4: "Wrong time: check your timezone (Asia/Tokyo recommended).",
+          guide_note: "Detailed guides:",
+          guide_android: "Android step-by-step",
+          preview_title: "Preview",
+          preview_note: "Embedded public calendar preview.",
+          update_note:
+            "Sync runs about every 6 hours; client refresh depends on each calendar app.",
           disclaimer:
-            "Disclaimer: This is an unofficial page. Please refer to the official announcements for final details.",
+            "Unofficial project. Please rely on official announcements for final details.",
         },
       };
 
