@@ -1,38 +1,23 @@
-# sakurazaka46-calendar
+# Sakurazaka46 Google Calendar
 
-Generate subscribe-ready ICS files from the Sakurazaka46 official schedule list.
+櫻坂46 日程订阅（非官方 / 粉丝维护）。  
+数据来源于官方日程页面，定期同步更新。
 
-## Local
-```bash
-pip install -r requirements.txt
-python scripts/generate_ics.py --cd all --months 8 --out docs/sakurazaka46_all.ics
-```
+页面入口：
+https://konnagi0707.github.io/sakurazaka46-calendar/
 
-## GitHub Pages
-Enable Pages with source: `main` branch + `/docs` folder. Then subscribe:
+订阅链接：
+- Google Calendar 添加：  
+  https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
+- iCal / ICS 订阅：  
+  https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics
 
-* https://<user>.github.io/<repo>/sakurazaka46_all.ics
+更新频率：
+后台约每 6 小时同步一次；实际显示可能因客户端缓存而延迟。
 
-## 订阅方式（不要导入）
-ICS 订阅链接：
-```
-https://calendar.google.com/calendar/ical/20abe4a7fe0b3d1f8f29e24a2b69a1c85f551bffcf506f6f9eb9cf0227dd3eea%40group.calendar.google.com/public/basic.ics
-```
+免责声明：
+非官方整理，日程以官网发布为准。
 
-Google Calendar 添加：
-```
-https://calendar.google.com/calendar?cid=MjBhYmU0YTdmZTBiM2QxZjhmMjllMjRhMmI2OWExYzg1ZjU1MWJmZmNmNTA2ZjZmOWViOWNmMDIyN2RkM2VlYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
-```
-
-## Google Calendar Sync
-This repo also includes a Google Calendar sync workflow that writes events into a public calendar
-so you can share `.../public/basic.ics`.
-
-Local run example:
-```bash
-python scripts/sync_gcal.py --cd all --months 8 --calendar-id <calendar-id> --sa-path service_account.json
-```
-
-GitHub Actions requires these secrets:
-* `GCAL_CALENDAR_ID`
-* `GCAL_SA_JSON_B64` (base64-encoded service account JSON)
+联系：
+- GitHub Issues: https://github.com/konnagi0707/sakurazaka46-calendar/issues
+- X: https://x.com/TechiNagisa1201
